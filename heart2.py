@@ -241,6 +241,7 @@ def draw(main: Tk, render_canvas_dict: dict, render_heart: Heart, render_frame=0
     
     FRAME_CHANGE = 7
     SMALL_HEART_SIZE = 25
+    NUM_HEART = 20
     if frame_index not in render_canvas_dict:
 
         canvas = Canvas( #背景
@@ -276,8 +277,8 @@ def draw(main: Tk, render_canvas_dict: dict, render_heart: Heart, render_frame=0
         RANDOM_NUM_X = 0 # retunrn [0,1)
         RANDOM_NUM_Y = 0
         
-        pos_x = [random.random()*CANVAS_WIDTH for _ in range(20)]
-        pos_y = [random.random()*CANVAS_HEIGHT for _ in range(20)]
+        pos_x = [random.random()*CANVAS_WIDTH for _ in range(NUM_HEART)]
+        pos_y = [random.random()*CANVAS_HEIGHT for _ in range(NUM_HEART)]
         print(frame_index,render_heart.frame_count())
         h_radio = frame_index*1.0/render_heart.frame_count()
         h_x = CANVAS_WIDTH*h_radio
@@ -293,9 +294,10 @@ def draw(main: Tk, render_canvas_dict: dict, render_heart: Heart, render_frame=0
         # for i in range(10): # 随机出现10个爱心,这个时候是1帧10个,怎么做到闪烁呢?每5帧变化一次?
         
         print("pos_x,y ",pos_x,pos_y)
-        for i in range(10):
+        for_range = int(NUM_HEART/2)
+        for i in range(for_range):
             canvas.create_text(pos_x[i],pos_y[i],text='♥',fill=HEART_COLOR,font=('楷体',int(SMALL_HEART_SIZE*((frame_index%FRAME_CHANGE+3)/FRAME_CHANGE)),'normal'))# 从小变大5帧一循环
-            canvas.create_text(pos_x[i+10],pos_y[i+10],text='♥',fill=HEART_COLOR,font=('楷体',int(SMALL_HEART_SIZE*((7-frame_index%FRAME_CHANGE)/FRAME_CHANGE)),'normal'))# 从小变大5帧一循环
+            canvas.create_text(pos_x[i+for_range],pos_y[i+for_range],text='♥',fill=HEART_COLOR,font=('楷体',int(SMALL_HEART_SIZE*((7-frame_index%FRAME_CHANGE)/FRAME_CHANGE)),'normal'))# 从小变大5帧一循环
 
         # 5frame 内 位置不变，大小变
 
